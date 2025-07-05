@@ -12,21 +12,30 @@ import org.openqa.selenium.io.FileHandler;
 
 public class ScreenshotUtil {
 
-	public static void takeScreenshot(WebDriver driver, String screenshotName) {
-		File evidenceDir = new File("Execution_Evidence");
-		if(!evidenceDir.exists()) {
-			evidenceDir.mkdir();
-		}
-		String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-		File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		File destFile = new File(evidenceDir + File.separator + screenshotName + "_" + timestamp + ".png");
+    private static final String BASE_FOLDER = "Execution_Evidence";
+    private static final String RUN_TIMESTAMP = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+    private static final File RUN_FOLDER = new File(BASE_FOLDER, RUN_TIMESTAMP);
 
-		try {
-			FileHandler.copy(srcFile, destFile);
-			System.out.println("Screenshot saved to : " +destFile.getAbsolutePath());
+    static {
+        // Create base and run folders when class is loaded
+        if (!RUN_FOLDER.exists()) {
+            boolean created = RUN_FOLDER.mkdirs();
+            if (!created) {
+                System.err.println("Failed to create run folder: " + RUN_FOLDER.getAbsolutePath());
+            }
+        }
+    }
 
-		} catch(IOException e) {
-			System.out.println("Failed to save screenshot : " +e.getMessage());
-		}
-	}
+    public static void takeScreenshot(WebDriver driver, String screenshotName) {
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        File destFile = new File(RUN_FOLDER, screenshotName + "_" + timestamp + ".png");
+
+        try {
+            FileHandler.copy(srcFile, destFile);
+            System.out.println("Screenshot saved to: " + destFile.getAbsolutePath());
+        } catch (IOException e) {
+            System.err.println("Failed to save screenshot: " + e.getMessage());
+        }
+    }
 }
