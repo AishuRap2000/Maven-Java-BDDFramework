@@ -19,8 +19,8 @@ public class Helper {
             for (Row row : sheet) {
                 if (row.getRowNum() == 0) continue;
 
-                String scenarioName = getCellValue(row.getCell(1)).trim(); // Col B
-                String runFlag = getCellValue(row.getCell(2)).trim();     // Col C
+                String scenarioName = getCellValue(row.getCell(1)).trim(); 
+                String runFlag = getCellValue(row.getCell(2)).trim();   
 
                 if ("Yes".equalsIgnoreCase(runFlag)) {
                     scenariosToRun.add(scenarioName);
@@ -41,9 +41,9 @@ public class Helper {
             for (Row row : sheet) {
                 if (row.getRowNum() == 0) continue;
 
-                String currentScenario = getCellValue(row.getCell(1)).trim(); // Col B
+                String currentScenario = getCellValue(row.getCell(1)).trim(); 
                 if (currentScenario.equalsIgnoreCase(scenarioName)) {
-                    Cell statusCell = row.getCell(3); // Col D
+                    Cell statusCell = row.getCell(3); 
                     if (statusCell == null) {
                         statusCell = row.createCell(3);
                     }

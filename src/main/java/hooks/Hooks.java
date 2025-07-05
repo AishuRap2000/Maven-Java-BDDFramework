@@ -16,7 +16,7 @@ public class Hooks {
     public static WebDriver driver;
     private static final String filePath = "./RunManager.xlsx";
     private static final List<String> allowedScenarios = getScenariosToRun(filePath);
-    private static final Set<String> executedScenarios = new HashSet<>(); // to track only those that really ran
+    private static final Set<String> executedScenarios = new HashSet<>(); // to track only  that really ran
 
     @Before
     public void setUp(Scenario scenario) {
@@ -49,7 +49,7 @@ public class Hooks {
 
         // Only write status if scenario was actually executed
         if (executedScenarios.contains(scenarioName)) {
-            String status = scenario.isFailed() ? "Fail" : "Pass";
+            String status = scenario.isFailed() ? "Fail" : "Pass"; // used conditional clause operator fpr assertion
             Helper.writeScenarioStatus(filePath, scenarioName, status);
         }
 

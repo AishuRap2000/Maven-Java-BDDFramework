@@ -18,12 +18,13 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
+import ReusableMethods.ScreenshotUtil;
 import hooks.Hooks;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class stepdefinitions {
+public class BasicInformation {
 
 	public WebDriver driver = Hooks.driver;
 	public static WebElement element;
