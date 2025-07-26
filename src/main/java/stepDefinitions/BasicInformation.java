@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +21,7 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 import ReusableMethods.ScreenshotUtil;
 import hooks.Hooks;
+import hooks.Helper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -33,13 +35,13 @@ public class BasicInformation {
 	public static ExtentReports extent = new ExtentReports();
 	public static ExtentTest Logger;
 
-	@Given("Launch browser url {string} and navigate")
-	public void LaunchWebsite(String URL) throws InterruptedException {
-		//Logger = extent.createTest("testautomationpractice website automation");
+	@Given("Launch browser url and navigate")
+	public void LaunchWebsite() throws InterruptedException {
+		Logger = extent.createTest("testautomationpractice website automation");
 //		System.out.println("Current SCenario name - " + scenario.getName());
 
-		driver.get(URL);
-		Thread.sleep(3000);
+		driver.get("https://testautomationpractice.blogspot.com/");
+		Thread.sleep(6000);
 		Logger.info("Launching website");
 
 		String actualURL = driver.getCurrentUrl();
@@ -104,10 +106,12 @@ public class BasicInformation {
 	}
 
 	@Then("I select Country dropdown")
-	public void CountryDD() {
+	public void CountryDD() throws IOException {
+		String countryValue = Helper.getData("Input", "Country_DD");
 		WebElement Country = driver.findElement(By.id("country"));
+		
 		Select country = new Select(Country);
-		country.selectByVisibleText("India");
+	    country.selectByVisibleText(countryValue);
 		ScreenshotUtil.takeScreenshot(driver, "Country Selection");
 	}
 

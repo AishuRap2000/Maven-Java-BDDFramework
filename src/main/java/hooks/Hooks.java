@@ -20,8 +20,9 @@ public class Hooks {
 
     @Before
     public void setUp(Scenario scenario) {
+    	Helper.setScenario(scenario);
         String scenarioName = scenario.getName().trim();
-
+        Helper.setScenario(scenario);
         if (!allowedScenarios.contains(scenarioName)) {
             System.out.println("Skipping scenario: " + scenarioName);
             throw new io.cucumber.java.PendingException("Skipped via RunManager.xlsx");

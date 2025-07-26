@@ -1,7 +1,7 @@
 Feature: Basic Information Inputs
 
 Background:
-  Given Launch browser url "https://testautomationpractice.blogspot.com/" and navigate
+  Given Launch browser url and navigate
 
 Scenario: Text Fields Input(As List)
   When I enter text inputs for Name "Aishwarya", Email,Phone and Address
