@@ -33,12 +33,12 @@ public class BasicInformation {
 	public static ExtentReports extent = new ExtentReports();
 	public static ExtentTest Logger;
 
-	@Given("Launch browser and navigate to test automation website")
-	public void LaunchWebsite() throws InterruptedException {
-		Logger = extent.createTest("testautomationpractice website automation");
+	@Given("Launch browser url {string} and navigate")
+	public void LaunchWebsite(String URL) throws InterruptedException {
+		//Logger = extent.createTest("testautomationpractice website automation");
 //		System.out.println("Current SCenario name - " + scenario.getName());
 
-		driver.get("https://testautomationpractice.blogspot.com/");
+		driver.get(URL);
 		Thread.sleep(3000);
 		Logger.info("Launching website");
 
